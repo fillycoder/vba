@@ -1,0 +1,43 @@
+Sub CreateAIPresentation()
+    Dim pptApp As Object
+    Dim pptPresentation As Object
+    Dim slideIndex As Integer
+    Dim slide As Object
+    Dim textBox As Object
+
+    ' Create a new PowerPoint application and presentation
+    Set pptApp = CreateObject("PowerPoint.Application")
+    Set pptPresentation = pptApp.Presentations.Add
+    pptApp.Visible = True
+
+    ' Contents of each slide
+    Dim slideTitles As Variant
+    Dim slideContents As Variant
+    slideTitles = Array("Title Slide", "Introduction to AI in the Workplace", "Understanding AI Capabilities", _
+                        "Benefits of AI for Productivity", "AI Tools for Workplace Productivity", _
+                        "Implementing AI in Your Workplace", "Overcoming Challenges and Limitations", _
+                        "Future Trends and Predictions", "Case Studies", "Interactive AI Demonstration (Optional)", _
+                        "Conclusion and Q&A", "Additional Resources", "Thank You Slide")
+
+    slideContents = Array("Leveraging AI for Workplace Productivity - Transforming the Future of Work", _
+                          "[Introduction content here]", "[AI Capabilities content here]", _
+                          "[Benefits content here]", "[AI Tools content here]", _
+                          "[Implementing AI content here]", "[Challenges content here]", _
+                          "[Future Trends content here]", "[Case Studies content here]", _
+                          "[Demonstration content here]", "[Conclusion content here]", _
+                          "[Additional Resources content here]", "Thank you for attending!")
+
+    ' Loop through the slides and add content
+    For slideIndex = LBound(slideTitles) To UBound(slideTitles)
+        ' Add a new slide
+        Set slide = pptPresentation.Slides.Add(slideIndex + 1, 1) ' 1 denotes ppLayoutText
+        ' Add title
+        slide.Shapes(1).TextFrame.TextRange.Text = slideTitles(slideIndex)
+        ' Add content
+        slide.Shapes(2).TextFrame.TextRange.Text = slideContents(slideIndex)
+    Next slideIndex
+
+    Set slide = Nothing
+    Set pptPresentation = Nothing
+    Set pptApp = Nothing
+End Sub
